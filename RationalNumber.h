@@ -8,18 +8,15 @@ protected:
     void try_reduce();
 public:
     RationalNumber(int numerator, int denominator);
-    RationalNumber() = delete;
-    std::string get_number() const;
+    RationalNumber() = default;
+    [[nodiscard]] std::string get_number_str() const;
     void operator ++();
     void operator ++(int);
     RationalNumber operator +(const RationalNumber& other) const;
     RationalNumber operator -(const RationalNumber& other) const;
     RationalNumber operator *(const RationalNumber& other) const;
     RationalNumber operator /(const RationalNumber& other) const;
-
-
-    friend std::ostream& operator << (std::ostream& outs,const RationalNumber &value);
-
+    friend auto operator << (std::ostream& outs,const RationalNumber &value) -> std::ostream&;
 };
 
 

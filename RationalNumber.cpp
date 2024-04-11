@@ -1,5 +1,5 @@
 #include "RationalNumber.h"
-
+#include <format>
 RationalNumber::RationalNumber(int numerator, int denominator)
 {
 this->numerator = numerator;
@@ -24,12 +24,8 @@ RationalNumber RationalNumber::operator+(const RationalNumber& other) const {
     return {this->numerator*other.denominator+other.numerator* this->denominator,this->denominator*other.denominator};
 }
 
-std::string RationalNumber::get_number() const {
-    std::string str;
-    str += std::to_string(this->numerator);
-    str += " / ";
-    str += std::to_string(this->denominator);
-    return str;
+std::string RationalNumber::get_number_str() const {
+    return std::format("{} / {}\n", this->numerator, this->denominator);
 }
 
 void RationalNumber::operator++(int) {
@@ -50,6 +46,6 @@ RationalNumber RationalNumber::operator/(const RationalNumber &other) const {
 }
 
 std::ostream &operator<<(std::ostream &outs, const RationalNumber &value) {
-   outs<<value.get_number();
+   outs<< value.get_number_str();
     return outs;
 }
