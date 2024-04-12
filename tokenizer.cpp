@@ -1,16 +1,9 @@
 #include <iostream>
 #include "tokenizer.h"
 
-tokenizer::Token::Token(TokenType type) {
-    this->type = type;
+tokenizer::Token::Token(const TokenType &type) : value(0, 1), type(type) {}
 
-}
-
-tokenizer::Token::Token(RationalNumber value) {
-    this->type = TokenType::RATIONAL;
-    this->value = value;
-}
-
+tokenizer::Token::Token(const RationalNumber &value) : value(value), type(TokenType::RATIONAL) {}
 
 auto tokenizer::parse_string(const std::string &str) -> std::vector<Token> {
     std::vector<Token> result;
@@ -42,13 +35,17 @@ auto tokenizer::parse_string(const std::string &str) -> std::vector<Token> {
                     std::cout << "le invalido tokenno";
                     continue;
                 }
-                int num=0;
+                int num = 0;
                 do {
                     num *= 10;
                     num += str.at(i) - '0';
+                    if (str.size() <= i + 1) {
+                        i++;
+                        break;
+                    }
                 } while (isdigit(str.at(++i)));
                 i--;
-                result.emplace_back(RationalNumber(num,1));
+                result.emplace_back(RationalNumber(num, 1));
                 break;
         }
     }

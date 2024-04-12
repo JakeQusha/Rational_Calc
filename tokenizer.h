@@ -11,12 +11,11 @@ namespace tokenizer {
         LEFT_PAREN,
         RIGHT_PAREN
     };
-    class Token {
+    struct Token {
         TokenType type;
         RationalNumber value;
-    public:
-        explicit Token(TokenType type);
-        explicit Token (RationalNumber value);
+        explicit Token(const TokenType& type);
+        explicit Token (const RationalNumber& value);
     };
     auto parse_string(const std::string& str)->std::vector<Token>;
 }

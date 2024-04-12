@@ -25,7 +25,7 @@ RationalNumber RationalNumber::operator+(const RationalNumber& other) const {
 }
 
 std::string RationalNumber::get_number_str() const {
-    return std::format("{} / {}\n", this->numerator, this->denominator);
+    return std::format("{} / {}", this->numerator, this->denominator);
 }
 
 void RationalNumber::operator++(int) {

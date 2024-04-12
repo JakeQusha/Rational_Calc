@@ -1,49 +1,21 @@
 #include <iostream>
 #include "RationalNumber.h"
-
-RationalNumber calculate(std::string ex) {
-    //handle braces
-    int counter = 0;
-    int start;
-    for (int i = 0; i < ex.size(); ++i) {
-        if (ex.at(i) == '(') {
-            counter++;
-            start = ++i;
-            while (counter > 0) {
-                if (i >= ex.size()) {
-                    std::cout << "inwalida";
-                    exit(1);
-                }
-                switch (ex.at(i++)) {
-                    case '(':
-                        counter++;
-                        break;
-                    case ')':
-                        counter--;
-                        break;
-                    default:
-                        break;
-                }
-            }
-            //std::cout<<ex.substr(start,i-start-1 )<<"\n";
-            ex.replace(start - 1, i - start + 1, calculate(ex.substr(start, i - start - 1)).get_number_str());
-            //std::cout<<ex<<"\n";
-        }
-    }
-    for (auto &x: ex) {
-
-        while (isdigit(x)) {
-
-        }
-    }
-    return {1, 1};
-}
-
+#include "tokenizer.h"
 auto main() -> int {
     std::string str;
     while (std::cin) {
         getline(std::cin, str);
         if (str == "exit") { break;}
-        std::cout << calculate(str) << std::endl;
+        auto tokens = tokenizer::parse_string(str);
+        for (auto x : tokens){
+            switch (x.type) {
+                case tokenizer::TokenType::RATIONAL:
+                    std::cout<<'{'<<x.value<<"} ";
+                    break;
+                default:
+                    std::cout<< static_cast<int>(x.type)<<" ";
+            }
+        }
+        std::cout<<std::endl;
     }
 }
