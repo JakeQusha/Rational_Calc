@@ -8,10 +8,11 @@ protected:
     void try_reduce();
 public:
     RationalNumber(int numerator, int denominator);
-    RationalNumber() = default;
+    RationalNumber();
     [[nodiscard]] std::string get_number_str() const;
     void operator ++();
     void operator ++(int);
+    RationalNumber operator -()const;
     RationalNumber operator +(const RationalNumber& other) const;
     RationalNumber operator -(const RationalNumber& other) const;
     RationalNumber operator *(const RationalNumber& other) const;

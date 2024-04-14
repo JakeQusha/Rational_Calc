@@ -7,4 +7,6 @@ add_executable(Rational_Calc main.cpp
         RationalNumber.cpp
         RationalNumber.h
         tokenizer.cpp
-        tokenizer.h)
+        tokenizer.h
+        calc.cpp
+        calc.h)
