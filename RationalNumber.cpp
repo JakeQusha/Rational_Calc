@@ -13,6 +13,10 @@ void RationalNumber::operator++() {
 }
 
 void RationalNumber::try_reduce() {
+    if (this->denominator < 0) {
+        this->numerator = -this->denominator;
+        this->denominator = abs(this->denominator);
+    }
     for (int i = 2; i <= std::min(this->numerator, this->denominator); ++i) {
         while (this->numerator % i == 0 && this->denominator % i == 0) {
             this->numerator /= i;
@@ -27,7 +31,9 @@ RationalNumber RationalNumber::operator+(const RationalNumber &other) const {
 }
 
 std::string RationalNumber::get_number_str() const {
-    return std::format("{} / {}", this->numerator, this->denominator);
+    if (this->denominator == 1)
+        return std::format("{}", this->numerator);
+    return std::format("{}/{}", this->numerator, this->denominator);
 }
 
 void RationalNumber::operator++(int) {
@@ -36,7 +42,7 @@ void RationalNumber::operator++(int) {
 }
 
 RationalNumber RationalNumber::operator-(const RationalNumber &other) const {
-    return {  other.numerator * this->denominator - this->numerator * other.denominator,
+    return {other.numerator * this->denominator - this->numerator * other.denominator,
             this->denominator * other.denominator};
 }
 
@@ -45,7 +51,7 @@ RationalNumber RationalNumber::operator*(const RationalNumber &other) const {
 }
 
 RationalNumber RationalNumber::operator/(const RationalNumber &other) const {
-    return { this->denominator * other.numerator, this->numerator * other.denominator};
+    return {this->denominator * other.numerator, this->numerator * other.denominator};
 }
 
 std::ostream &operator<<(std::ostream &outs, const RationalNumber &value) {
@@ -54,7 +60,7 @@ std::ostream &operator<<(std::ostream &outs, const RationalNumber &value) {
 }
 
 RationalNumber RationalNumber::operator-() const {
-    return {-numerator,denominator};
+    return {-numerator, denominator};
 }
 
 

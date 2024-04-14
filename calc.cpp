@@ -1,4 +1,3 @@
-#include <ranges>
 #include <iostream>
 #include <format>
 #include "calc.h"
@@ -40,8 +39,8 @@ auto calculator::evaluate_equation(std::vector<tokenizer::Token> equation) -> Ra
             equation.erase(equation.begin());
             break;
         case tokenizer::TokenType::SUB_OP:
-            equation.front().value = -equation.front().value;
             equation.erase(equation.begin());
+            equation.front().value = -equation.front().value;
             break;
         case tokenizer::TokenType::RATIONAL:
             break;
@@ -58,7 +57,7 @@ auto calculator::evaluate_equation(std::vector<tokenizer::Token> equation) -> Ra
                     case tokenizer::TokenType::RATIONAL:
                         break;
                     default:
-                        std::cout << "invalifa";
+                        std::cerr << "invalifa";
                         break;
                 }
                 break;
@@ -74,7 +73,7 @@ auto calculator::evaluate_equation(std::vector<tokenizer::Token> equation) -> Ra
                     case tokenizer::TokenType::RATIONAL:
                         break;
                     default:
-                        std::cout << "invalifa";
+                        std::cerr << "invalida";
                         break;
                 }
                 break;
@@ -88,13 +87,13 @@ auto calculator::evaluate_equation(std::vector<tokenizer::Token> equation) -> Ra
                             equation.at(i + 2).value = -equation.at(i + 2).value;
                             equation.erase(equation.begin() + 1 + i);
                         } else {
-                            std::cout << "invalifa";
+                            std::cerr << "invalifa";
                         }
                         break;
                     case tokenizer::TokenType::RATIONAL:
                         break;
                     default:
-                        std::cout << "invalifa";
+                        std::cerr << "invalifa";
                         break;
                 }
                 break;
@@ -108,31 +107,53 @@ auto calculator::evaluate_equation(std::vector<tokenizer::Token> equation) -> Ra
                             equation.at(i + 2).value = -equation.at(i + 2).value;
                             equation.erase(equation.begin() + 1 + i);
                         } else {
-                            std::cout << "invalifa";
+                            std::cerr << "invalifa";
                         }
                         break;
                     case tokenizer::TokenType::RATIONAL:
                         break;
                     default:
-                        std::cout << "invalifa";
+                        std::cerr << "invalifa";
                         break;
                 }
                 break;
             case tokenizer::TokenType::RATIONAL:
                 if (equation.at(i + 1).type == tokenizer::TokenType::LEFT_PAREN ||
-                    equation.at(i + 1).type == tokenizer::TokenType::RIGHT_PAREN) { std::cout << "invalifa"; }
+                    equation.at(i + 1).type == tokenizer::TokenType::RIGHT_PAREN) { std::cerr << "invalifa"; }
                 if (equation.at(i + 1).type == tokenizer::TokenType::RATIONAL) {
-                    equation.insert(equation.begin() + i, tokenizer::Token(tokenizer::TokenType::MUL_OP));
+                    equation.insert(equation.begin() + i+1, tokenizer::Token(tokenizer::TokenType::MUL_OP));
                     i++;
                 }
                 break;
             default:
-                std::cout << "invalifa";
+                std::cerr << "invalifa";
                 break;
         }
     }
     if(equation.back().type != tokenizer::TokenType::RATIONAL){
-        std::cout << "invalifa";}
+        std::cerr << "invalifa";}
+    for (int i = 0; i < ((int)equation.size())-2;) {
+        switch (equation.at(i+1).type) {
+            case tokenizer::TokenType::ADD_OP:
+                i+=2;
+                break;
+            case tokenizer::TokenType::SUB_OP:
+                i+=2;
+                break;
+            case tokenizer::TokenType::MUL_OP:
+                equation.at(i).value = equation.at(i+2).value * equation.at(i).value;
+                equation.erase(equation.begin()+i+1,equation.begin()+i+3);
+                break;
+            case tokenizer::TokenType::DIV_OP:
+                equation.at(i).value = equation.at(i+2).value / equation.at(i).value;
+                equation.erase(equation.begin()+i+1,equation.begin()+i+3);
+                break;
+            default:
+                std::cerr << "invalifa";
+                equation.erase(equation.begin()+i+1,equation.begin()+i+3);
+        }
+
+    }
     for (int i = 0; i < ((int)equation.size())-2;) {
         switch (equation.at(i+1).type) {
             case tokenizer::TokenType::ADD_OP:
@@ -148,7 +169,7 @@ auto calculator::evaluate_equation(std::vector<tokenizer::Token> equation) -> Ra
                 equation.at(i).value = equation.at(i+2).value / equation.at(i).value;
                 break;
             default:
-                std::cout << "invalifa";
+                std::cerr << "invalifa";
         }
         equation.erase(equation.begin()+i+1,equation.begin()+i+3);
     }
