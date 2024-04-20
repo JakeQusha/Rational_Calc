@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <expected>
 #include "RationalNumber.h"
 namespace tokenizer {
     enum class TokenType{
@@ -17,5 +18,5 @@ namespace tokenizer {
         explicit Token(const TokenType& type);
         explicit Token (const RationalNumber& value);
     };
-    auto parse_string(const std::string& str)->std::vector<Token>;
+    auto parse_string(const std::string& str)->std::expected<std::vector<Token>,int>;
 }

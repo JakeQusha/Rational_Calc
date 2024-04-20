@@ -5,7 +5,7 @@ tokenizer::Token::Token(const TokenType &type) : value(0, 1), type(type) {}
 
 tokenizer::Token::Token(const RationalNumber &value) : value(value), type(TokenType::RATIONAL) {}
 
-auto tokenizer::parse_string(const std::string &str) -> std::vector<Token> {
+auto tokenizer::parse_string(const std::string &str) -> std::expected<std::vector<Token>,int> {
     std::vector<Token> result;
     for (int i = 0; i < str.size(); ++i) {
         switch (str.at(i)) {
@@ -32,8 +32,7 @@ auto tokenizer::parse_string(const std::string &str) -> std::vector<Token> {
             default:
                 if (!isdigit(str.at(i))) {
                     //error
-                    std::cout << "le invalido tokenno";
-                    continue;
+                    return std::unexpected(i);
                 }
                 int num = 0;
                 do {

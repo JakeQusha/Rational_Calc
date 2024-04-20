@@ -177,5 +177,5 @@ auto calculator::evaluate_equation(std::vector<tokenizer::Token> equation) -> Ra
 }
 
 auto calculator::evaluate_string(const std::string &str) -> RationalNumber {
-    return evaluate_equation(tokenizer::parse_string(str));
+    return evaluate_equation(*tokenizer::parse_string(str));
 }

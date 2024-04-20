@@ -55,8 +55,7 @@ RationalNumber RationalNumber::operator/(const RationalNumber &other) const {
 }
 
 std::ostream &operator<<(std::ostream &outs, const RationalNumber &value) {
-    outs << value.get_number_str();
-    return outs;
+    return  outs << value.get_number_str();;
 }
 
 RationalNumber RationalNumber::operator-() const {
