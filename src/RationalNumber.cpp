@@ -17,7 +17,7 @@ void RationalNumber::try_reduce() {
         this->numerator = -this->denominator;
         this->denominator = abs(this->denominator);
     }
-    for (int i = 2; i <= std::min(this->numerator, this->denominator); ++i) {
+    for (int i = 2; i <= std::abs(std::min(this->numerator, this->denominator)); ++i) {
         while (this->numerator % i == 0 && this->denominator % i == 0) {
             this->numerator /= i;
             this->denominator /= i;

@@ -139,38 +139,41 @@ auto calculator::evaluate_equation(std::vector<tokenizer::Token> equation) -> st
     if (equation.back().type != tokenizer::TokenType::RATIONAL) {
         return std::unexpected(Error(ErrorType::MISSING_END, equation.back().pos + 1));
     }
-    auto eval=[&](const std::set<tokenizer::TokenType>& operations)->bool {
+    auto eval = [&](const std::set<tokenizer::TokenType> &operations) -> bool {
         for (int i = 0; i < ((int) equation.size()) - 2;) {
             switch (equation.at(i + 1).type) {
                 case tokenizer::TokenType::ADD_OP:
-                    if(operations.contains(tokenizer::TokenType::ADD_OP)){
+                    if (operations.contains(tokenizer::TokenType::ADD_OP)) {
                         equation.at(i).value = equation.at(i + 2).value + equation.at(i).value;
                         equation.erase(equation.begin() + i + 1, equation.begin() + i + 3);
-                    } else{
+                    } else {
                         i += 2;
                     }
                     break;
                 case tokenizer::TokenType::SUB_OP:
-                    if(operations.contains(tokenizer::TokenType::SUB_OP)){
+                    if (operations.contains(tokenizer::TokenType::SUB_OP)) {
                         equation.at(i).value = equation.at(i + 2).value - equation.at(i).value;
                         equation.erase(equation.begin() + i + 1, equation.begin() + i + 3);
-                    } else{
+                    } else {
                         i += 2;
-                    }break;
+                    }
+                    break;
                 case tokenizer::TokenType::MUL_OP:
-                    if(operations.contains(tokenizer::TokenType::MUL_OP)){
+                    if (operations.contains(tokenizer::TokenType::MUL_OP)) {
                         equation.at(i).value = equation.at(i + 2).value * equation.at(i).value;
                         equation.erase(equation.begin() + i + 1, equation.begin() + i + 3);
-                    } else{
+                    } else {
                         i += 2;
-                    }break;
+                    }
+                    break;
                 case tokenizer::TokenType::DIV_OP:
-                    if(operations.contains(tokenizer::TokenType::DIV_OP)){
+                    if (operations.contains(tokenizer::TokenType::DIV_OP)) {
                         equation.at(i).value = equation.at(i + 2).value / equation.at(i).value;
                         equation.erase(equation.begin() + i + 1, equation.begin() + i + 3);
-                    } else{
+                    } else {
                         i += 2;
-                    }break;
+                    }
+                    break;
                 default:
                     return true;
             }
@@ -178,10 +181,10 @@ auto calculator::evaluate_equation(std::vector<tokenizer::Token> equation) -> st
         }
         return false;
     };
-    if(eval({tokenizer::TokenType::MUL_OP,tokenizer::TokenType::DIV_OP})){
+    if (eval({tokenizer::TokenType::MUL_OP, tokenizer::TokenType::DIV_OP})) {
         return std::unexpected(Error(ErrorType::LOGIC_ERROR, -1));
     }
-    if(eval({tokenizer::TokenType::ADD_OP,tokenizer::TokenType::SUB_OP})){
+    if (eval({tokenizer::TokenType::ADD_OP, tokenizer::TokenType::SUB_OP})) {
         return std::unexpected(Error(ErrorType::LOGIC_ERROR, -1));
     }
     return equation.at(0).value;

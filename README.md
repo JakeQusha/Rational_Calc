@@ -8,6 +8,7 @@ Simple rational console calculator written in c++. Made for fun in my free time.
 - So far supported operations are are:```addition (+)```, ```subtraction (-)```, ```multiplication (*)``` and ```division (/)```.
 - Equation with parentheses are supported ```()```.
 - Spaces do not matter.
+- type ```exit``` to exit application.
 
 ## Examples
 ### Valid inputs:

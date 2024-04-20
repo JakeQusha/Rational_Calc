@@ -13,11 +13,14 @@ namespace calculator {
         MISSING_END,
         LOGIC_ERROR
     };
+
     struct Error {
         ErrorType type;
         int where;
-        Error() =delete;
-        Error(ErrorType type,int where);
+
+        Error() = delete;
+
+        Error(ErrorType type, int where);
     };
 
     auto evaluate_equation(std::vector<tokenizer::Token> equation) -> std::expected<RationalNumber, Error>;

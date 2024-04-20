@@ -10,22 +10,22 @@ auto tokenizer::parse_string(const std::string &str) -> std::expected<std::vecto
     for (int i = 0; i < str.size(); ++i) {
         switch (str.at(i)) {
             case '+':
-                result.emplace_back(TokenType::ADD_OP,i);
+                result.emplace_back(TokenType::ADD_OP, i);
                 break;
             case '-':
-                result.emplace_back(TokenType::SUB_OP,i);
+                result.emplace_back(TokenType::SUB_OP, i);
                 break;
             case '*':
-                result.emplace_back(TokenType::MUL_OP,i);
+                result.emplace_back(TokenType::MUL_OP, i);
                 break;
             case '/':
-                result.emplace_back(TokenType::DIV_OP,i);
+                result.emplace_back(TokenType::DIV_OP, i);
                 break;
             case '(':
-                result.emplace_back(TokenType::LEFT_PAREN,i);
+                result.emplace_back(TokenType::LEFT_PAREN, i);
                 break;
             case ')':
-                result.emplace_back(TokenType::RIGHT_PAREN,i);
+                result.emplace_back(TokenType::RIGHT_PAREN, i);
                 break;
             case ' ':
                 continue;

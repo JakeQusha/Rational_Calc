@@ -26,22 +26,27 @@ auto main() -> int {
         }
         switch (result.error().type) {
             case calculator::ErrorType::INVALID_STRING:
-                std::cerr << "Illegal Character:" << std::endl << str << std::endl << under(result.error().where) << std::endl;
+                std::cerr << "Illegal Character:" << std::endl << str << std::endl << under(result.error().where)
+                          << std::endl;
                 break;
             case calculator::ErrorType::UNEXPECTED_RIGHT_PAREN:
-                std::cerr << "Unexpected Closing Parenthesis:" << std::endl << str << std::endl << under(result.error().where) << std::endl;
+                std::cerr << "Unexpected Closing Parenthesis:" << std::endl << str << std::endl
+                          << under(result.error().where) << std::endl;
                 break;
             case calculator::ErrorType::MISSING_RIGHT_PAREN:
-                std::cerr << "Missing Closing Parenthesis:" << std::endl << str << std::endl << under((int)str.size()) << std::endl;
+                std::cerr << "Missing Closing Parenthesis:" << std::endl << str << std::endl << under((int) str.size())
+                          << std::endl;
                 break;
             case calculator::ErrorType::UNEXPECTED_TOKEN:
-                std::cerr << "Unexpected Operator:" << std::endl << str << std::endl << under(result.error().where) << std::endl;
+                std::cerr << "Unexpected Operator:" << std::endl << str << std::endl << under(result.error().where)
+                          << std::endl;
                 break;
             case calculator::ErrorType::MISSING_END:
-                std::cerr << "Missing Number After Operator:" << std::endl << str << std::endl << under(result.error().where) << std::endl;
+                std::cerr << "Missing Number After Operator:" << std::endl << str << std::endl
+                          << under(result.error().where) << std::endl;
                 break;
             case calculator::ErrorType::LOGIC_ERROR:
-                std::cerr << "Logic Error"<<std::endl;
+                std::cerr << "Logic Error" << std::endl;
                 break;
         }
     }
