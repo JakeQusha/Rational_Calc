@@ -1,31 +1,31 @@
 #include <iostream>
 #include "tokenizer.h"
 
-tokenizer::Token::Token(const TokenType &type) : value(0, 1), type(type) {}
+tokenizer::Token::Token(const TokenType &type, int pos) : value(0, 1), type(type), pos{pos} {}
 
 tokenizer::Token::Token(const RationalNumber &value) : value(value), type(TokenType::RATIONAL) {}
 
-auto tokenizer::parse_string(const std::string &str) -> std::expected<std::vector<Token>,int> {
+auto tokenizer::parse_string(const std::string &str) -> std::expected<std::vector<Token>, int> {
     std::vector<Token> result;
     for (int i = 0; i < str.size(); ++i) {
         switch (str.at(i)) {
             case '+':
-                result.emplace_back(TokenType::ADD_OP);
+                result.emplace_back(TokenType::ADD_OP,i);
                 break;
             case '-':
-                result.emplace_back(TokenType::SUB_OP);
+                result.emplace_back(TokenType::SUB_OP,i);
                 break;
             case '*':
-                result.emplace_back(TokenType::MUL_OP);
+                result.emplace_back(TokenType::MUL_OP,i);
                 break;
             case '/':
-                result.emplace_back(TokenType::DIV_OP);
+                result.emplace_back(TokenType::DIV_OP,i);
                 break;
             case '(':
-                result.emplace_back(TokenType::LEFT_PAREN);
+                result.emplace_back(TokenType::LEFT_PAREN,i);
                 break;
             case ')':
-                result.emplace_back(TokenType::RIGHT_PAREN);
+                result.emplace_back(TokenType::RIGHT_PAREN,i);
                 break;
             case ' ':
                 continue;
