@@ -15,9 +15,9 @@ public:
 
     [[nodiscard]] std::string get_number_str() const;
 
-    [[nodiscard]] int get_den();
+    [[nodiscard]] int get_den() const;
 
-    [[nodiscard]] int get_num();
+    [[nodiscard]] int get_num() const;
 
     void operator++();
 

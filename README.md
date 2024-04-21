@@ -1,14 +1,14 @@
 # Rational Calculator
 
-Simple rational console calculator written in c++. Made for fun in my free time.
+Simple console rational calculator written in c++. Made for fun in my free time.
 
 ## Usage
 - Simply type in your equation and hit return.
 - If you make syntax mistake it will show you where you made it.
-- So far supported operations are are:```addition (+)```, ```subtraction (-)```, ```multiplication (*)``` and ```division (/)```.
+- So far supported operations are:```addition (+)```, ```subtraction (-)```, ```multiplication (*)``` and ```division (/)```.
 - Equation with parentheses are supported ```()```.
 - Spaces do not matter.
-- type ```exit``` to exit application.
+- type ```exit``` to exit an application.
 
 ## Examples
 ### Valid inputs:
