@@ -1,7 +1,7 @@
 #include <iostream>
 #include "tokenizer.h"
 
-tokenizer::Token::Token(const TokenType &type, int pos) : value(0, 1), type(type), pos{pos} {}
+tokenizer::Token::Token(const TokenType &type, int pos) : value(0, 1), type(type), pos(pos) {}
 
 tokenizer::Token::Token(const RationalNumber &value) : value(value), type(TokenType::RATIONAL) {}
 

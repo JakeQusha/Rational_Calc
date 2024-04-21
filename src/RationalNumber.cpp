@@ -12,17 +12,19 @@ void RationalNumber::operator++() {
     this->try_reduce();
 }
 
+static auto gcd(int num, int den) -> int {
+    return den == 0 ? std::max(num, -num) : gcd(den, num % den);
+}
+
 void RationalNumber::try_reduce() {
     if (this->denominator < 0) {
         this->numerator = -this->denominator;
-        this->denominator = abs(this->denominator);
+        this->denominator = std::abs(this->denominator);
     }
-    for (int i = 2; i <= std::abs(std::min(this->numerator, this->denominator)); ++i) {
-        while (this->numerator % i == 0 && this->denominator % i == 0) {
-            this->numerator /= i;
-            this->denominator /= i;
-        }
-    }
+    int gc = gcd(this->numerator, this->denominator);
+    this->numerator /= gc;
+    this->denominator /= gc;
+
 }
 
 RationalNumber RationalNumber::operator+(const RationalNumber &other) const {
@@ -60,6 +62,14 @@ std::ostream &operator<<(std::ostream &outs, const RationalNumber &value) {
 
 RationalNumber RationalNumber::operator-() const {
     return {-numerator, denominator};
+}
+
+int RationalNumber::get_num() {
+    return numerator;
+}
+
+int RationalNumber::get_den() {
+    return denominator;
 }
 
 

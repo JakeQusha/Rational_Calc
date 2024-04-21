@@ -17,7 +17,6 @@ auto main() -> int {
         if (!tokens) {
             std::cerr << "Illegal Character:" << std::endl << str << std::endl << under(tokens.error()) << std::endl;
             continue;
-
         }
         auto result = calculator::evaluate_equation(*tokens);
         if (result) {
@@ -43,6 +42,10 @@ auto main() -> int {
                 break;
             case calculator::ErrorType::MISSING_END:
                 std::cerr << "Missing Number After Operator:" << std::endl << str << std::endl
+                          << under(result.error().where) << std::endl;
+                break;
+            case calculator::ErrorType::ZERO_DIVISION:
+                std::cerr << "Division By Zero:" << std::endl << str << std::endl
                           << under(result.error().where) << std::endl;
                 break;
             case calculator::ErrorType::LOGIC_ERROR:

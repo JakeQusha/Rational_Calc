@@ -11,6 +11,7 @@ namespace calculator {
         MISSING_RIGHT_PAREN,
         UNEXPECTED_TOKEN,
         MISSING_END,
+        ZERO_DIVISION,
         LOGIC_ERROR
     };
 

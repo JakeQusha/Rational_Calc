@@ -15,6 +15,10 @@ public:
 
     [[nodiscard]] std::string get_number_str() const;
 
+    [[nodiscard]] int get_den();
+
+    [[nodiscard]] int get_num();
+
     void operator++();
 
     void operator++(int);
